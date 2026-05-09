@@ -1,12 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import PostList from './components/PostList';
+import SinglePost from './components/SinglePost';
+import CreatePost from './components/CreatePost';
+import DeletePost from './components/DeletePost';
+import UpdatePost from './components/UpdatePost';
+import { ScrollView } from 'react-native-web';
+
+
+
+const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <QueryClientProvider client={queryClient}>
+      <ScrollView style={styles.container}>
+        <PostList />
+        <SinglePost id={1} />
+        <CreatePost />
+        <UpdatePost />
+        <DeletePost />
+        
+        <StatusBar style="auto" />
+      </ScrollView>
+    </QueryClientProvider>
   );
 }
 
@@ -14,7 +32,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 50,
+    paddingHorizontal: 16,
   },
 });
